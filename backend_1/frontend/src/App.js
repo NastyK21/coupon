@@ -7,27 +7,27 @@ export default function App() {
   const [allCoupons, setAllCoupons] = useState([]);
 
   // Claim a coupon
-  const API_BASE_URL = "http://localhost:4000"; // Update to backend port
+  const API_BASE_URL = "https://coupon-m3hj.onrender.com"; // Deployed backend URL
 
-  const claimCoupon = async () => {
-    try {
-      const res = await axios.post(`${API_BASE_URL}/coupon/claim-coupon`);
-      setMessage(res.data.message);
-      fetchAvailableCoupons();
-    } catch (error) {
-      setMessage(error.response?.data?.message || "Error claiming coupon");
-    }
-  };
-  
-  const fetchAvailableCoupons = async () => {
-    const res = await axios.get(`${API_BASE_URL}/coupon/available-coupons`);
-    setAvailableCoupons(res.data);
-  };
-  
-  const fetchAllCoupons = async () => {
-    const res = await axios.get(`${API_BASE_URL}/admin/coupons`);
-    setAllCoupons(res.data);
-  };
+const claimCoupon = async () => {
+  try {
+    const res = await axios.post(`${API_BASE_URL}/coupon/claim-coupon`);
+    setMessage(res.data.message);
+    fetchAvailableCoupons();
+  } catch (error) {
+    setMessage(error.response?.data?.message || "Error claiming coupon");
+  }
+};
+
+const fetchAvailableCoupons = async () => {
+  const res = await axios.get(`${API_BASE_URL}/coupon/available-coupons`);
+  setAvailableCoupons(res.data);
+};
+
+const fetchAllCoupons = async () => {
+  const res = await axios.get(`${API_BASE_URL}/admin/coupons`);
+  setAllCoupons(res.data);
+};
 
   useEffect(() => {
     fetchAvailableCoupons();
